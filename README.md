@@ -1,34 +1,13 @@
-# The phenomenon
-
-<!-- This is the SD5913 assignment 2 template. Everything in this file is yours to
-replace, and the check counts words: comments like this one are not words, so
-delete each one as you write. Start with the heading: name the phenomenon.
-
-Then, in this order, at least 150 words in total.
-
-New to folders, paths, or the files here whose names start with a dot? Read
-https://github.com/sd5913/pfad/blob/2026/reference/files.md first. Ten minutes. -->
-
-![what the picture is](out/plot.png)
+# Hong‑Kong‑Rainfall Visualisation
 
 ## The phenomenon
+This visualisation explores the variation of daily rainfall in Hong‑Kong across the whole year. Hong‑Kong has a subtropical climate with a distinct rainy season. Heavy rainfall is mostly concentrated in summer months brought by monsoon and thunderstorms. The chart tracks daily precipitation values, showing large rainfall spikes during the wet season while rainfall keeps relatively low in cooler drier winter months. Observing these fluctuations helps us understand the seasonal rainfall pattern of this coastal city.
 
-<!-- What goes up and down, and why you looked at it. -->
 
 ## The source
+Dataset retrieved from the open data service of Hong Kong Observatory:
+<https://www.hko.gov.hk/csci/>
 
-<!-- A link to the page or endpoint the file came from, and one line on what is in
-the file: how many rows, what a row means, what the units are. -->
 
-## What the picture shows
+## Project Structure
 
-<!-- Two or three sentences. Including what it hides: every transformation throws
-something away, and naming what yours threw away is the easiest way to sound like
-you know what you did. -->
-
-## Run it
-
-```
-uv run fetch.py
-uv run plot.py
-```
