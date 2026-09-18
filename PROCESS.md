@@ -17,3 +17,5 @@
 ## Key issues during development
 - At first I added data folder and out folder into gitignore. This caused CI test failure because raw csv and generated png were not committed to repository.
 - When drawing chart, I adjusted figure size and label text to make axis readable. Some styling options were tried; finally I chose simple clean style for the rainfall plot.
+
+Small edit for new commit.
