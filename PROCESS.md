@@ -1,21 +1,32 @@
 # Development Process
 
 ## Tools used
-- Python: for data fetching and visualisation generation
-- Requests library: download rainfall raw dataset from Hong‑Kong Observatory open data website
-- Matplotlib: create rainfall chart and export png image
 
-## What I kept
-1. Original downloaded csv rainfall dataset inside data folder. I keep the untouched raw data, so the source data is preserved for review.
-2. Final output png chart saved in out folder. This visual result shows the rainfall distribution from the dataset.
-3. Two main scripts: fetch.py for downloading data, plot.py for cleaning data and drawing chart. Separate files make functions clear.
+Python with Requests downloads the source CSV. Pandas reads dates and rainfall values, and Matplotlib exports the chart. The scripts use uv inline dependency metadata so their dependencies are explicit. Code and documentation corrections were made with Codex assistance.
 
-## What I rejected & reasons
-1. I considered combining fetch and plot logic into one single python file. I rejected this idea. Reason: splitting download and visualisation into two files makes debugging easier. If download fails, I do not need to run plotting code repeatedly.
-2. Initially I planned to filter and modify raw csv values before saving. I rejected this change. Reason: raw dataset should remain unchanged. Any data processing only happens inside plot script, without altering source file.
+## What is kept
 
-## Key issues during development
-- At first I added data folder and out folder into gitignore. This caused CI test failure because raw csv and generated png were not committed to repository.
-- When drawing chart, I adjusted figure size and label text to make axis readable. Some styling options were tried; finally I chose simple clean style for the rainfall plot.
+1. The original `data/rainfall.csv` snapshot is preserved unchanged. Downloading and plotting remain separate steps.
+2. The generated chart is committed at `out/rainfall_plot.png`, allowing reviewers to see the result without running Python.
+3. Dates, units, source and missing-value conventions are stated alongside the output.
 
-Small edit for new commit.
+## Corrections made during review
+
+The previous `plot.py` generated a sine-wave temperature series instead of reading rainfall observations. It has been replaced with CSV-based rainfall plotting, and its output now matches the README. The old temperature description was removed.
+
+The downloader now uses the same `rainfall.csv` filename as the checked-in data and plotting script. The HTTP header name was corrected to the ASCII spelling `User-Agent`. Existing snapshots are reused rather than overwritten.
+
+The original archive includes unavailable February 29 placeholders in non-leap years, such as 1900. Parsing removes those impossible dates while rejecting invalid dates that contain actual measurements.
+
+The README's unclosed code fence was fixed, the directory listing is fenced, and the source URL now points directly to the rainfall dataset. Descriptions of data and output folders now reflect the committed files.
+
+## Choices and rejected alternatives
+
+- Keep unavailable and incomplete observations missing instead of replacing them with zero. Zero would incorrectly imply a confirmed dry day.
+- Show trace rainfall as 0.025 mm, with an explicit note that the source only specifies less than 0.05 mm. These display values should not be interpreted as exact measurements.
+- Prefer the latest full calendar year to a partial current year, while allowing `--year` for explicit comparisons.
+- Keep the raw archive intact; perform cleaning in memory. A single station and year do not justify conclusions about all of Hong Kong or a long-term climate trend.
+
+## Verification
+
+Run the two commands in the README and confirm that the generated image shows rainfall, the selected year and millimetre units. Check that the original data file has no changes. Parsing rejects duplicate dates and unrecognised rainfall values. The course workflow checks the submitted repository structure; visual quality and the interpretation of the chart still require human review.
